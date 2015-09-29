@@ -88,7 +88,7 @@ command :setup do |c|
     sh "heroku config:set GOOGLE_CLIENT_SECRET=#{client_secret}"
 
     email_domain = ask "What email domain do you want to restrict access to? (e.g. example.com)"
-    sh "heroku config:set GOOGLE_EMAIL_DOMAIN=#{team_id}"
+    sh "heroku config:set GOOGLE_EMAIL_DOMAIN=#{email_domain}"
 
     say "We're all set. Time to deploy our code to Heroku"
     system "git push heroku master --force"
