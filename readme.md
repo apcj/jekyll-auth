@@ -31,7 +31,6 @@ First, add `gem 'nexaas-jekyll-google-auth'` to your `Gemfile` or if you don't a
 ```
 source "https://rubygems.org"
 
-gem 'sinatra-google-auth', :git => 'https://github.com/apcj/sinatra-google-auth.git'
 gem 'nexaasa-jekyll-google-auth'
 ```
 
