@@ -5,9 +5,9 @@ require 'rubygems'
 require 'dotenv/load'
 require 'commander/import'
 require 'rake'
-require 'jekyll-auth'
 require 'git'
 require 'mkmf'
+require_relative '../lib/jekyll-auth'
 
 def changed?
   git = Git.init
@@ -104,8 +104,11 @@ end
 command :serve do |c|
   c.syntax = "jekyll-auth serve"
   c.description = "Run Jekyll Auth site locally"
+  c.option '--port STRING', String, 'Sets port to run the webserver'
+  c.option '--host STRING', String, 'listen on HOST (default: localhost)'
   c.action do |args, options|
-
+    options.default :port => '4000'
+    options.default :host => 'localhost'
     # Ensure environment variables are set
     ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_ID", "GOOGLE_EMAIL_DOMAIN"].each do |var|
       next unless ENV[var].nil?
@@ -120,7 +123,7 @@ command :serve do |c|
 
     say "Spinning up the server with authentication. Use CTRL-C to stop."
     say "To preview the site without authentication, use the `jekyll serve` command"
-    sh "bundle exec rackup -p 4000"
+    sh "bundle exec rackup --port=#{options.port} --host=#{options.host}"
 
   end
 end

@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency("rake", "~> 10.3")
   s.add_dependency("rack-ssl-enforcer", "~> 0.2")
   s.add_dependency("mail", "~> 2.7")
+  s.add_dependency("sinatra-google-auth", "~> 1.3")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
 end
