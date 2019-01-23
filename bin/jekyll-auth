@@ -2,6 +2,7 @@
 # Command-line interface for jekyll-auth
 
 require 'rubygems'
+require 'dotenv/load'
 require 'commander/import'
 require 'rake'
 require 'jekyll-auth'
@@ -53,7 +54,7 @@ command :setup do |c|
       say "Looks like we're missing the Heroku client. Let's see if we can't install it..."
       `wget -qO- https://toolbelt.heroku.com/install.sh | sh`
     end
-    
+
     git = Git.init
     git.add "config.ru"
     git.add "Rakefile"
@@ -137,4 +138,4 @@ command :build do |c|
   end
 end
 
-default_command :serve
+# default_command :serve

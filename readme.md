@@ -2,9 +2,9 @@
 
 *A simple way to use Google OAuth2 to serve a protected jekyll site to users within an email domain*
 
-**NOTE: This repo is a fork of [benbalter/jekyll-auth](https://github.com/benbalter/jekyll-auth), with GitHub replaced by Google OAuth2, using 
+**NOTE: This repo is a fork of [benbalter/jekyll-auth](https://github.com/benbalter/jekyll-auth), with GitHub replaced by Google OAuth2, using
 [apcj/sinatra-google-auth](https://github.com/apcj/sinatra-google-auth) (forked from [csquared/sinatra-google-auth](https://github.com/csquared/sinatra-google-auth)) and [zquestz/omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2).**
- 
+
 ## The problem
 
 [Jekyll](http://github.com/mojombo/jekyll) and [GitHub Pages](http://pages.github.com) are awesome, right? Static site, lightning fast, everything versioned in Git. What else could you ask for?
@@ -13,7 +13,7 @@ But what if you only want to share that site with people in your company? Before
 
 ## Requirements
 
-1. You trust that people with a google account matching your domain are really members 
+1. You trust that people with a google account matching your domain are really members
    of your organisation, and therefore should be able to see the site.
 2. A Google Application (You can always [register one](https://console.developers.google.com/project) for free)
 3. A heroku account
@@ -26,13 +26,13 @@ Follow instructions at [omniauth-google-oauth2](https://github.com/zquestz/omnia
 
 ### Add Jekyll Auth to your site
 
-First, add `gem 'jekyll-auth'` to your `Gemfile` or if you don't already have a `Gemfile`, create a file called `Gemfile` in the root of your site's repository with the following content:
+First, add `gem 'nexaas-jekyll-google-auth'` to your `Gemfile` or if you don't already have a `Gemfile`, create a file called `Gemfile` in the root of your site's repository with the following content:
 
 ```
 source "https://rubygems.org"
 
-gem 'jekyll-auth', :git => 'https://github.com/apcj/jekyll-google-auth.git'
 gem 'sinatra-google-auth', :git => 'https://github.com/apcj/sinatra-google-auth.git'
+gem 'nexaasa-jekyll-google-auth'
 ```
 
 Next, `cd` into your project's directory and run `bundle install`.
@@ -95,14 +95,14 @@ GOOGLE_EMAIL_DOMAIN=example.com
 
 ## Under the hood
 
-Every time you push to Heroku, we take advantage of the fact that Heroku 
-automatically runs the `rake assets:precompile` command (normally used 
-for Rails sites) to build our Jekyll site and store it statically, 
+Every time you push to Heroku, we take advantage of the fact that Heroku
+automatically runs the `rake assets:precompile` command (normally used
+for Rails sites) to build our Jekyll site and store it statically,
 just like GitHub pages would.
 
-Anytime a request comes in for a page, we run it through 
-[Sinatra](http://www.sinatrarb.com/) (using the `_site` folder as the static 
+Anytime a request comes in for a page, we run it through
+[Sinatra](http://www.sinatrarb.com/) (using the `_site` folder as the static
 file folder, just as `public` would be normally), and authenticate it using [apcj/sinatra-google-auth](https://github.com/apcj/sinatra-google-auth).
 
-If they have the correct, they get the page. Otherwise, all they get bounced 
+If they have the correct, they get the page. Otherwise, all they get bounced
 back to Google, where they might be able to log in with an appropriate user.
