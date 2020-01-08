@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
                              "lib/jekyll-auth/version.rb", "lib/jekyll-auth/config.rb", ".gitignore"]
   s.executables           = ["jekyll-auth"]
 
-  s.add_dependency("jekyll", "~> 2.0")
+  s.add_dependency("jekyll", "~> 3.7")
   s.add_dependency("sinatra-index", "~> 0.0")
   s.add_dependency("commander", "~> 4.1")
   s.add_dependency("git", "~> 1.2")
